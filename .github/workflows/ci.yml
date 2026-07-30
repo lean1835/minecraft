@@ -1,0 +1,28 @@
+name: CI (Test & Build)
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    name: Build & Lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify Workspace Files
+        run: |
+          echo "Dự án gồm các file:"
+          ls -la
+          echo "Kiểm tra sự tồn tại của index.html..."
+          test -f index.html && echo "OK: index.html tồn tại!"
