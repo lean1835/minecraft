@@ -5,6 +5,7 @@ on:
     branches: [ "main", "develop" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build-and-test:
@@ -15,14 +16,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Verify Workspace Files
+      - name: List Workspace Files
         run: |
           echo "Dự án gồm các file:"
           ls -la
-          echo "Kiểm tra sự tồn tại của index.html..."
-          test -f index.html && echo "OK: index.html tồn tại!"
